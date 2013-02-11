@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{1DD63894-DBB9-40EF-BFF2-55624CB285AF}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -12,6 +12,8 @@
     <AssemblyName>UIAComWrapper</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>main.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,7 +34,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Accessibility" />
-    <Reference Include="Interop.UIAutomationClient, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="Interop.UIAutomationClient, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6fbfc15cf580ef58, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\Interop.UIAutomationClient.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -85,6 +90,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="CustomInterop.UIAutomationClient.il" />
+    <None Include="interop.snk" />
+    <None Include="main.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -95,6 +102,6 @@
   </Target>
   -->
   <PropertyGroup>
-    <PreBuildEvent>"$(FrameworkDir)\$(FrameworkVersion)\ilasm" $(ProjectDir)\CustomInterop.UIAutomationClient.il /dll /output=$(TargetDir)\Interop.UIAutomationClient.dll</PreBuildEvent>
+    <PreBuildEvent>"$(FrameworkDir)\$(FrameworkVersion)\ilasm" $(ProjectDir)\CustomInterop.UIAutomationClient.il /dll /key:$(ProjectDir)\interop.snk /output=$(TargetDir)\Interop.UIAutomationClient.dll</PreBuildEvent>
   </PropertyGroup>
 </Project>
