@@ -1,8 +1,7 @@
-// (c) Copyright Microsoft, 2012.
+﻿// (c) Copyright Microsoft Corporation, 2010.
 // This source is subject to the Microsoft Permissive License.
 // See http://www.microsoft.com/opensource/licenses.mspx#Ms-PL.
 // All other rights reserved.
-
 
 using System;
 using System.Windows.Automation;
@@ -255,8 +254,6 @@ namespace UIAComWrapperTests
         }
 
         [TestMethod()]
-        [Ignore]
-        // Test is not working on Windows 8 due to changes in Explorer
         public void VirtualizedPatternTest()
         {
             AutomationElement itemsView = ExplorerTargetTests.explorerHost.Element.FindFirst(TreeScope.Subtree,

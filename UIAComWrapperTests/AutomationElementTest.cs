@@ -1,8 +1,7 @@
-// (c) Copyright Microsoft, 2012.
+﻿// (c) Copyright Microsoft Corporation.
 // This source is subject to the Microsoft Permissive License.
 // See http://www.microsoft.com/opensource/licenses.mspx#Ms-PL.
 // All other rights reserved.
-
 
 using System.Windows.Automation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -76,18 +75,6 @@ namespace UIAComWrapperTests
                 new PropertyCondition(AutomationElement.AccessKeyProperty, "Ctrl+Esc"),
                 new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Button));
             return AutomationElement.RootElement.FindFirst(TreeScope.Subtree, cond);
-        }
-
-        public static AutomationElement GetTaskbar()
-        {
-            PropertyCondition cond = new PropertyCondition(AutomationElement.ClassNameProperty, "Shell_TrayWnd");
-            return AutomationElement.RootElement.FindFirst(TreeScope.Subtree, cond);
-        }
-
-        public static AutomationElement GetClock()
-        {
-            return GetTaskbar().FindFirst(TreeScope.Subtree,
-                new PropertyCondition(AutomationElement.ClassNameProperty, "TrayClockWClass"));
         }
 
         /// <summary>
@@ -203,8 +190,8 @@ namespace UIAComWrapperTests
         [TestMethod()]
         public void GetClickablePointTest()
         {
-            AutomationElement clock = GetClock();
-            Point point = clock.GetClickablePoint();
+            AutomationElement startButton = GetStartButton();
+            Point point = startButton.GetClickablePoint();
             Assert.IsTrue(point.X > 0);
             Assert.IsTrue(point.Y > 0);
         }
@@ -242,7 +229,7 @@ namespace UIAComWrapperTests
         [TestMethod()]
         public void GetCurrentPatternTest()
         {
-            LegacyIAccessiblePattern pattern = (LegacyIAccessiblePattern)GetTaskbar().GetCurrentPattern(LegacyIAccessiblePattern.Pattern);
+            InvokePattern pattern = (InvokePattern)GetStartButton().GetCurrentPattern(InvokePatternIdentifiers.Pattern);
             Assert.IsNotNull(pattern);
         }
 
@@ -253,10 +240,10 @@ namespace UIAComWrapperTests
         public void GetCachedPatternTest()
         {
             CacheRequest req = new CacheRequest();
-            req.Add(LegacyIAccessiblePattern.Pattern);
+            req.Add(InvokePatternIdentifiers.Pattern);
             using (req.Activate())
             {
-                LegacyIAccessiblePattern pattern = (LegacyIAccessiblePattern)GetTaskbar().GetCachedPattern(LegacyIAccessiblePattern.Pattern);
+                InvokePattern pattern = (InvokePattern)GetStartButton().GetCachedPattern(InvokePatternIdentifiers.Pattern);
                 Assert.IsNotNull(pattern);
             }
         }
@@ -264,7 +251,7 @@ namespace UIAComWrapperTests
         [TestMethod()]
         public void GetSupportedTest()
         {
-            AutomationProperty[] properties = GetTaskbar().GetSupportedProperties();
+            AutomationProperty[] properties = GetStartButton().GetSupportedProperties();
             Assert.IsNotNull(properties);
             Assert.IsTrue(properties.Length > 0);
             foreach (AutomationProperty property in properties)
@@ -275,7 +262,7 @@ namespace UIAComWrapperTests
                 Assert.IsNotNull(programmaticName);
             }
 
-            AutomationPattern[] patterns = GetTaskbar().GetSupportedPatterns();
+            AutomationPattern[] patterns = GetStartButton().GetSupportedPatterns();
             Assert.IsNotNull(patterns);
             Assert.IsTrue(patterns.Length > 0);
             foreach (AutomationPattern pattern in patterns)
@@ -309,16 +296,16 @@ namespace UIAComWrapperTests
         [TestMethod()]
         public void NotSupportedValueTest()
         {
-            AutomationElement taskbar = GetTaskbar();
+            AutomationElement startButton = GetStartButton();
             // Pretty sure the start button doesn't support this
-            object value = taskbar.GetCurrentPropertyValue(AutomationElement.ItemStatusProperty, true);
+            object value = startButton.GetCurrentPropertyValue(AutomationElement.ItemStatusProperty, true);
             Assert.AreEqual(value, AutomationElement.NotSupported);
         }
 
         [TestMethod()]
         public void BoundaryRectTest()
         {
-            System.Windows.Rect boundingRect = GetTaskbar().Current.BoundingRectangle;
+            System.Windows.Rect boundingRect = GetStartButton().Current.BoundingRectangle;
             Assert.IsTrue(boundingRect.Width > 0);
             Assert.IsTrue(boundingRect.Height > 0);
         }
@@ -326,8 +313,8 @@ namespace UIAComWrapperTests
         [TestMethod()]
         public void CompareTest()
         {
-            AutomationElement el1 = GetTaskbar();
-            AutomationElement el2 = GetTaskbar();
+            AutomationElement el1 = GetStartButton();
+            AutomationElement el2 = GetStartButton();
             Assert.IsTrue(Automation.Compare((AutomationElement)null, (AutomationElement)null));
             Assert.IsFalse(Automation.Compare(null, el1));
             Assert.IsFalse(Automation.Compare(el1, null));

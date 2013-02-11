@@ -1,8 +1,7 @@
-// (c) Copyright Microsoft, 2012.
+﻿// (c) Copyright Microsoft Corporation.
 // This source is subject to the Microsoft Permissive License.
 // See http://www.microsoft.com/opensource/licenses.mspx#Ms-PL.
 // All other rights reserved.
-
 
 using System;
 using System.Globalization;
@@ -104,8 +103,6 @@ namespace UIAComWrapperInternal
         private static PropertyConverter convertToToggleState = new PropertyConverter(Schema.ConvertToToggleState);
         private static PropertyConverter convertToWindowInteractionState = new PropertyConverter(Schema.ConvertToWindowInteractionState);
         private static PropertyConverter convertToWindowVisualState = new PropertyConverter(Schema.ConvertToWindowVisualState);
-        private static PropertyConverter convertToAnnotationType = new PropertyConverter(Schema.ConvertToAnnotationType);
-        private static PropertyConverter convertToStyleId = new PropertyConverter(Schema.ConvertToStyleId); 
 
         private static readonly PropertyTypeInfo[] _propertyInfoTable = new PropertyTypeInfo[] { 
             // Properties requiring conversion
@@ -120,8 +117,6 @@ namespace UIAComWrapperInternal
             new PropertyTypeInfo(convertToWindowInteractionState, WindowPattern.WindowInteractionStateProperty, typeof(WindowInteractionState)), 
             new PropertyTypeInfo(convertToRowOrColumnMajor, TablePattern.RowOrColumnMajorProperty, typeof(RowOrColumnMajor)), 
             new PropertyTypeInfo(convertToToggleState, TogglePattern.ToggleStateProperty, typeof(ToggleState)), 
-            new PropertyTypeInfo(convertToAnnotationType, AnnotationPattern.AnnotationTypeIdProperty, typeof(AnnotationType)),
-            new PropertyTypeInfo(convertToStyleId, StylesPattern.StyleIdProperty, typeof(StyleId)),
 
             // Text attributes 
             new PropertyTypeInfo(null, TextPattern.AnimationStyleAttribute, typeof(AnimationStyle)), 
@@ -153,16 +148,7 @@ namespace UIAComWrapperInternal
             new PropertyTypeInfo(null, TextPattern.TabsAttribute, typeof(double[])), 
             new PropertyTypeInfo(null, TextPattern.TextFlowDirectionsAttribute, typeof(FlowDirections)), 
             new PropertyTypeInfo(null, TextPattern.UnderlineColorAttribute, typeof(int)), 
-            new PropertyTypeInfo(null, TextPattern.UnderlineStyleAttribute, typeof(TextDecorationLineStyle)),
-            new PropertyTypeInfo(null, TextPattern2.AnnotationTypesAttribute, typeof(AnnotationType[])),
-            new PropertyTypeInfo(null, TextPattern2.AnnotationObjectsAttribute, typeof(AutomationElement[])),
-            new PropertyTypeInfo(null, TextPattern2.StyleNameAttribute, typeof(string)),
-            new PropertyTypeInfo(null, TextPattern2.StyleIdAttribute, typeof(StyleId)),
-            new PropertyTypeInfo(null, TextPattern2.LinkAttribute, typeof(AutomationElement)),
-            new PropertyTypeInfo(null, TextPattern2.IsActiveAttribute, typeof(bool)),
-            new PropertyTypeInfo(null, TextPattern2.SelectionActiveEndAttribute, typeof(ActiveEnd)),
-            new PropertyTypeInfo(null, TextPattern2.CaretPositionAttribute, typeof(CaretPosition)),
-            new PropertyTypeInfo(null, TextPattern2.CaretBidiModeAttribute, typeof(CaretBidiMode))
+            new PropertyTypeInfo(null, TextPattern.UnderlineStyleAttribute, typeof(TextDecorationLineStyle))
         };
 
         private static readonly PatternTypeInfo[] _patternInfoTable = new PatternTypeInfo[] { 
@@ -187,17 +173,7 @@ namespace UIAComWrapperInternal
             new PatternTypeInfo(ItemContainerPattern.Pattern, new PatternWrapper(ItemContainerPattern.Wrap)),
             new PatternTypeInfo(VirtualizedItemPattern.Pattern, new PatternWrapper(VirtualizedItemPattern.Wrap)),
             new PatternTypeInfo(LegacyIAccessiblePattern.Pattern, new PatternWrapper(LegacyIAccessiblePattern.Wrap)),
-            new PatternTypeInfo(SynchronizedInputPattern.Pattern, new PatternWrapper(SynchronizedInputPattern.Wrap)),
-            new PatternTypeInfo(ObjectModelPattern.Pattern, new PatternWrapper(ObjectModelPattern.Wrap)),
-            new PatternTypeInfo(AnnotationPattern.Pattern, new PatternWrapper(AnnotationPattern.Wrap)),
-            new PatternTypeInfo(TextPattern2.Pattern, new PatternWrapper(TextPattern2.Wrap)),
-            new PatternTypeInfo(StylesPattern.Pattern, new PatternWrapper(StylesPattern.Wrap)),
-            new PatternTypeInfo(SpreadsheetPattern.Pattern, new PatternWrapper(SpreadsheetPattern.Wrap)),
-            new PatternTypeInfo(SpreadsheetItemPattern.Pattern, new PatternWrapper(SpreadsheetItemPattern.Wrap)),
-            new PatternTypeInfo(TransformPattern2.Pattern, new PatternWrapper(TransformPattern2.Wrap)),
-            new PatternTypeInfo(TextChildPattern.Pattern, new PatternWrapper(TextChildPattern.Wrap)),
-            new PatternTypeInfo(DragPattern.Pattern, new PatternWrapper(DragPattern.Wrap)),
-            new PatternTypeInfo(DropTargetPattern.Pattern, new PatternWrapper(DropTargetPattern.Wrap)),
+            new PatternTypeInfo(SynchronizedInputPattern.Pattern, new PatternWrapper(SynchronizedInputPattern.Wrap))
      };
 
         
@@ -294,16 +270,6 @@ namespace UIAComWrapperInternal
         private static object ConvertToWindowVisualState(object value)
         {
             return (WindowVisualState)value;
-        }
-
-        private static object ConvertToAnnotationType(object value)
-        {
-            return (AnnotationType)value;
-        }
-
-        private static object ConvertToStyleId(object value)
-        {
-            return (StyleId)value;
         }
 
         internal static bool GetPatternInfo(AutomationPattern id, out PatternTypeInfo info)

@@ -1,9 +1,7 @@
-// (c) Copyright Microsoft, 2012.
+﻿// (c) Copyright Microsoft Corporation.
 // This source is subject to the Microsoft Permissive License.
 // See http://www.microsoft.com/opensource/licenses.mspx#Ms-PL.
 // All other rights reserved.
-
-
 
 using System;
 using System.Diagnostics;
@@ -86,7 +84,7 @@ namespace System.Windows.Automation
     public class AutomationElementCollectionEnumerator : IEnumerator
     {
         private UIAutomationClient.IUIAutomationElementArray _obj;
-        private int _index = -1;
+        private int _index;
         private int _cElem;
 
         #region IEnumerator Members
@@ -121,7 +119,7 @@ namespace System.Windows.Automation
 
         public void Reset()
         {
-            this._index = -1;
+            this._index = 0;
         }
 
         #endregion

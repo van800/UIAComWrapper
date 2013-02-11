@@ -1,4 +1,4 @@
-﻿// (c) Copyright Michael Bernstein, 2009.
+﻿// (c) Copyright Microsoft Corporation.
 // This source is subject to the Microsoft Permissive License.
 // See http://www.microsoft.com/opensource/licenses.mspx#Ms-PL.
 // All other rights reserved.
@@ -15,7 +15,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("UIAComWrapperTests")]
-[assembly: AssemblyCopyright("Copyright ©  2009 Michael Bernstein")]
+[assembly: AssemblyCopyright("Copyright ©  2009 Microsoft Corporation")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

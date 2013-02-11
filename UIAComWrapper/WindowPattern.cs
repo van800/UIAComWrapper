@@ -1,9 +1,7 @@
-// (c) Copyright Microsoft, 2012.
+﻿// (c) Copyright Microsoft Corporation.
 // This source is subject to the Microsoft Permissive License.
 // See http://www.microsoft.com/opensource/licenses.mspx#Ms-PL.
 // All other rights reserved.
-
-
 
 using System;
 using System.Collections;
@@ -75,6 +73,7 @@ namespace System.Windows.Automation
                 Exception newEx; if (Utility.ConvertException(e, out newEx)) { throw newEx; } else { throw; }
             }
         }
+
         
         public WindowPatternInformation Cached
         {
@@ -92,6 +91,8 @@ namespace System.Windows.Automation
                 return new WindowPatternInformation(this._el, false);
             }
         }
+
+
         
         [StructLayout(LayoutKind.Sequential)]
         public struct WindowPatternInformation
